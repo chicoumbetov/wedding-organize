@@ -12,9 +12,9 @@ import {useDispatch} from "react-redux";
 function App() {
     const classes = useStyles();
     const dispatch = useDispatch()
-
+    // console.log("dispatch", dispatch(getPosts()))
     useEffect(()=> {
-        dispatch(getPosts)
+        dispatch(getPosts())
     }, [dispatch])
 
   return (

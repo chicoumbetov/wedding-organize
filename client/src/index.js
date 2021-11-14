@@ -9,7 +9,7 @@ import {applyMiddleware, compose, createStore} from "redux";
 import thunk from "redux-thunk";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
-
+console.log("store:", store)
 ReactDOM.render(
   <Provider store={store}>
     <App />
