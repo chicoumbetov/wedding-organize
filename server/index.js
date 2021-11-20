@@ -31,6 +31,10 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 
 app.use('/posts', postRoutes);
 
+app.get('/', (req, res) => {
+    res.send('Hello to wedding API')
+})
+
 // https://www.mongodb.com/cloud/atlas
 const PORT = process.env.PORT || 5000;
 // mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }) // <-- no longer necessary
