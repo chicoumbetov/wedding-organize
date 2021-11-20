@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import useStyles from "./styles";
 import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@material-ui/core";
 import moment from "moment";
 import {MoreHoriz, ThumbUp} from '@mui/icons-material';
 
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
 
     return(
@@ -16,8 +16,8 @@ const Post = ({ post }) => {
                 <Typography variant={"body2"}>{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{ color: 'white'}} size={"small"} onClick={() => {}}>
-                    <MoreHoriz/>
+                <Button style={{ color: 'white'}} size={"small"} onClick={() => {setCurrentId(post._id)}}>
+                    <MoreHoriz />
                 </Button>
             </div>
             <div className={classes.details}>
@@ -29,8 +29,7 @@ const Post = ({ post }) => {
             <CardActions className={classes.cardActions}>
                 <Button size={"small"} color={"primary"} onClick={() => {}}>
                     <ThumbUp/>
-                    Like
-                    {post.likeCount}
+                    {` Like ${post.likeCount}`}
                 </Button>
                 <Button size={"small"} color={"primary"} onClick={() => {}}>
                     Delete

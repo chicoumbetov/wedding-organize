@@ -7,9 +7,25 @@ import postRoutes from './routes/posts.js'
 
 const app = express();
 
+// middleware with CORS pour que front 4200 et back 3000 puissent communiquer entre eux.
+app.use((req, res, next) => {
+    // ces headers permettent:
+
+    // d'accéder à notre API depuis n'importe quelle origine ( '*'
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // d'ajouter les headers mentionnés aux requêtes envoyées vers notre API (Origin , X-Requested-With , etc.) ;
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+
+    // d'envoyer des requêtes avec les méthodes mentionnées ( GET ,POST , etc.).
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    next();
+});
+
+app.use(cors());
+
 app.use(bodyParser.json({ limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
-app.use(cors());
 
 app.use('/posts', postRoutes);
 
