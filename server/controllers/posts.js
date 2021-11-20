@@ -43,7 +43,22 @@ export const updatePost = async (req, res) => {
     const updatedPost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id}, { new: true })
 
     try {
-        res.status(202).json(updatedPost)
+        res.json(updatedPost)
+    } catch (error) {
+        res.status(409).json({ message: error.message })
+    }
+
+}
+
+export const deletePost = async (req, res) => {
+    const { id: _id } = req.params;
+    console.log("iiiiiiiid deletePost:", _id)
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
+    await PostMessage.findByIdAndRemove(_id)
+
+    try {
+        res.json({ message: 'Post deleted successfully'})
     } catch (error) {
         res.status(409).json({ message: error.message })
     }
