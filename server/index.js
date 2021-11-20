@@ -2,10 +2,12 @@ import express from "express"
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import dotenv from 'dotenv'
 
 import postRoutes from './routes/posts.js'
 
 const app = express();
+dotenv.config()
 
 // middleware with CORS pour que front 4200 et back 3000 puissent communiquer entre eux.
 app.use((req, res, next) => {
@@ -30,11 +32,9 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use('/posts', postRoutes);
 
 // https://www.mongodb.com/cloud/atlas
-const CONNECTION_URL = 'mongodb+srv://chicoumbetov:skypefacebook@cluster0.msors.mongodb.net/wedding-app?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000;
-
 // mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }) // <-- no longer necessary
-mongoose.connect(CONNECTION_URL)
+mongoose.connect(process.env.CONNECTION_URL)
         .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
         .catch((error) => console.log(error.message) )
 
