@@ -28,8 +28,17 @@ export const updatePost = (id, updatedPostData) => async (dispatch) => {
     // console.log("updatePost:", id, updatedPostData, dispatch)
     try {
         const { data } = await api.updatePost(id, updatedPostData)
-        console.log("uuuu,", data)
+        // console.log("uuuu,", data)
         dispatch({ type: 'UPDATE', payload: data })
+    } catch (error) {
+        console.log("actions error:",error)
+    }
+}
+
+export const likePost = (id) => async (dispatch) =>{
+    try {
+        const { data } = await api.likePost(id)
+        dispatch({ type: 'LIKE', payload: data })
     } catch (error) {
         console.log("actions error:",error)
     }
