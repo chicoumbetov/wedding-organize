@@ -17,7 +17,7 @@ const Form = ({ currentId, setCurrentId }) => {
         title: '', message: '',
         tags: '', selectedFile: ''
     })
-    console.log("post:", post)
+    // console.log("post:", post)
 
     useEffect(() => {
         if(post) setPostData(post);
@@ -25,17 +25,19 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log("event", event)
+        // console.log("event", event)
         if(currentId) {
             dispatch(updatePost(currentId, postData))
-            console.log("disp:",dispatch(updatePost(currentId, postData)))
+            // console.log("disp:",dispatch(updatePost(currentId, postData)))
         } else {
             dispatch(createPost(postData))
         }
+        clear()
     }
 
     const clear = () => {
-
+        setCurrentId(null)
+        setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' })
     }
 
     return(
