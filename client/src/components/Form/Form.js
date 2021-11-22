@@ -47,7 +47,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField
                     name={"creator"}
                     variant={"outlined"}
-                    label={"Creator"}
+                    label={"Full name"}
                     fullWidth
                     value={postData.creator}
                     onChange={(event) => setPostData(
@@ -59,7 +59,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField
                     name={"title"}
                     variant={"outlined"}
-                    label={"Title"}
+                    label={"Number of persons"}
                     fullWidth
                     value={postData.title}
                     onChange={(event) => setPostData(
@@ -71,7 +71,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField
                     name={"message"}
                     variant={"outlined"}
-                    label={"Message"}
+                    label={"Expenses X"}
                     fullWidth
                     value={postData.message}
                     onChange={(event) => setPostData(
@@ -83,7 +83,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField
                     name={"tags"}
                     variant={"outlined"}
-                    label={"Tags"}
+                    label={"Expenses Y"}
                     fullWidth
                     value={postData.tags}
                     onChange={(event) => setPostData(
