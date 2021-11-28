@@ -15,9 +15,10 @@ export default makeStyles({
     },
     card: {
         display: 'flex',
-        flexDirection: 'column',
+        flex: 1,
+        flexDirection: 'row',
         justifyContent: 'space-between',
-        borderRadius: '15px',
+        // borderRadius: '5px',
         height: '100%',
         position: 'relative',
     },
@@ -43,6 +44,13 @@ export default makeStyles({
     },
     title: {
         padding: '0 16px',
+        width: '70px',
+        borderLeft: '1px solid #000',
+        borderRight: '1px solid #000'
+    },
+    message: {
+        width: '80px',
+        borderRight: '1px solid #000'
     },
     cardActions: {
         padding: '0 16px 8px 16px',
