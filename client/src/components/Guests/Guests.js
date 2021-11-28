@@ -13,7 +13,10 @@ const Guests = ({ setCurrentId }) => {
 
     return(
         !posts.length
-            ? <CircularProgress value={75} color={"primary"} />
+            ? (<>
+                {/**<CircularProgress value={75} color={"primary"} />*/}
+                <div>No guests yet</div>
+            </>)
             : (
                 <Grid className={classes.mainContainer} container alignItems={"stretch"} >
                     <div className={classes.card}>

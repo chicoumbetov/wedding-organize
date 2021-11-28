@@ -13,7 +13,10 @@ const Posts = ({ setCurrentId }) => {
 
     return(
         !posts.length
-            ? <CircularProgress value={75} color={"primary"} />
+            ? (<>
+                {/**<CircularProgress value={75} color={"primary"} />*/}
+                <div>No posts yet</div>
+            </>)
             : (
               <Grid className={classes.mainContainer} container alignItems={"stretch"} spacing={3}>
                   {
