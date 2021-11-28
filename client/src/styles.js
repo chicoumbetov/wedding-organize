@@ -6,6 +6,9 @@ export default makeStyles((theme) => ({
             flexDirection: 'column-reverse',
         },
     },
+    gridContainer: {
+
+    },
     appBar: {
         borderRadius: 15,
         margin: '30px 0',
