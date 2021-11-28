@@ -15,7 +15,7 @@ const Guest = ({ post, setCurrentId }) => {
         <div style={{ display: 'flex'}}>
             <div className={classes.card}>
                 <div style={{ display: 'flex', flex: 1, marginLeft: '20px' }}>
-                    <Typography onClick={() => {setCurrentId(post._id)}} style={{  width: '200px', marginRight: '10px'}} variant={"h6"}>{post.creator}</Typography>
+                    <Typography onClick={() => {setCurrentId(post._id)}} style={{  width: '200px', marginRight: '10px'}} variant={"h6"}>{post.name}</Typography>
                     &nbsp;
                     <Typography variant={"h6"} className={classes.title} gutterBottom>{post.title}</Typography>
                     &nbsp;
@@ -30,7 +30,7 @@ const Guest = ({ post, setCurrentId }) => {
 
             </div>
             <Button style={{ direction: 'column'}} size={"small"} color={"default"} onClick={() => dispatch(likePost(post._id))}>
-                <ThumbUp/> &nbsp; &nbsp; {post.likeCount}
+                <ThumbUp/> &nbsp; &nbsp; {/** post.likes*/}
             </Button>
         </div>
     )

@@ -11,11 +11,11 @@ const Form = ({ currentId, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId): null)
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     const [postData, setPostData] = useState({
-        creator: '',
-        title: '', message: '',
-        tags: '', selectedFile: ''
+        // creator: '',
+        title: '', message: '', tags: '', selectedFile: ''
     })
     // console.log("post:", post)
 
@@ -27,23 +27,37 @@ const Form = ({ currentId, setCurrentId }) => {
         event.preventDefault()
         // console.log("event", event)
         if(currentId) {
-            dispatch(updatePost(currentId, postData))
+            // dispatch(updatePost(currentId, postData)) // posts without user linking
+            dispatch(updatePost(currentId, { ...postData, name: user?.result?.name })) // posts linked to users
+
             // console.log("disp:",dispatch(updatePost(currentId, postData)))
         } else {
-            dispatch(createPost(postData))
+            // dispatch(createPost(postData))  // posts without user linking
+            dispatch(createPost({ ...postData, name: user?.result?.name })) // posts linked to users
         }
         clear()
     }
 
+    if(!user?.result?.name) {
+        return (<Paper className={classes.paper}>
+            <Typography variant={"h6"} align={"center"}>
+                Please Sign In to create your own guests/memories and like other's memories.
+            </Typography>
+        </Paper>)
+    }
+
     const clear = () => {
         setCurrentId(null)
-        setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' })
+        setPostData({
+            // creator: '',
+            title: '', message: '', tags: '', selectedFile: '' })
     }
 
     return(
         <Paper className={classes.paper}>
             <form autoComplete={"off"} noValidate className={`${classes.root} ${classes.form}`} onSubmit={(data)=> handleSubmit(data)}>
                 <Typography variant={"h6"}>{currentId ? 'Editing' : 'Creating'} a guest</Typography>
+                {/**
                 <TextField
                     name={"creator"}
                     variant={"outlined"}
@@ -55,7 +69,7 @@ const Form = ({ currentId, setCurrentId }) => {
                             ...postData, creator: event.target.value
                         }
                     )}
-                />
+                />*/}
                 <TextField
                     name={"title"}
                     variant={"outlined"}
