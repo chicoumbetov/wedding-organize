@@ -1,7 +1,7 @@
 import React from "react";
 import useStyles from './styles'
 import {useSelector} from "react-redux";
-import { CircularProgress, Grid, Typography} from "@material-ui/core";
+import { Grid, Typography} from "@material-ui/core";
 import Guest from "./Guest/Guest";
 
 
