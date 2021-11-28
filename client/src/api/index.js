@@ -1,12 +1,26 @@
 import axios from 'axios'
 
+const API = axios.create({ baseURL: "http://localhost:5000" })
+// const API = axios.create({ baseURL: "https://wedding-react-js.herokuapp.com" })
+
+API.interceptors.request.use((req) => {
+    if(localStorage.getItem('profile')) {
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`
+    }
+
+    return req;
+})
+
 // const url = "http://localhost:5000/posts";
-const url = "https://wedding-react-js.herokuapp.com/posts";
+// const url = "https://wedding-react-js.herokuapp.com/posts";
 
-export const fetchPosts = () => axios.get(url)
-export const createPost = (newPost) => axios.post(url, newPost)
+export const fetchPosts = () => API.get("/posts")
+export const createPost = (newPost) => API.post("posts", newPost)
+export const likePost = (id) => API.patch(`/posts/${id}/likePost`)
 
-export const updatePost = (id, updatedPostData) => axios.patch(`${url}/${id}`, updatedPostData)
-export const likePost = (id) => axios.patch(`${url}/${id}/likePost`)
+export const updatePost = (id, updatedPostData) => API.patch(`/posts/${id}`, updatedPostData)
 
-export const deletePost = (id) => axios.delete(`${url}/${id}`)
+export const deletePost = (id) => API.delete(`posts/${id}`)
+
+export const signIn = (formData) => API.post("/user/signin", formData)
+export const signUp = (formData) => API.post("/user/signup", formData)

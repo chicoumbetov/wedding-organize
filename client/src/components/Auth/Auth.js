@@ -24,7 +24,6 @@ const Auth = () => {
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
 
-
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log("formState", formData)
