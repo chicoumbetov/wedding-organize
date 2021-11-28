@@ -8,12 +8,16 @@ import Input from "./Input";
 import GoogleLogin from "react-google-login";
 import {useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {signin, signup} from "../../actions/auth";
+
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: ''}
 
 const Auth = () => {
     const classes = useStyles()
 
     const [showPassword, setShowPassword] = useState(false)
     const [isSignUp, setIsSignUp] = useState(false)
+    const [formData, setFormData ] = useState(initialState)
 
     const dispatch = useDispatch()
     const history = useNavigate()
@@ -21,12 +25,24 @@ const Auth = () => {
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
 
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log("formState", formData)
 
+        if(isSignUp) {
+            dispatch(signup(formData, history))
+        } else {
+            dispatch(signin(formData, history))
+        }
     }
 
-    const handleChange = () => {
+    const handleChange = (e) => {
+        e.preventDefault()
 
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
     }
 
     const switchMode = () => {
@@ -59,19 +75,19 @@ const Auth = () => {
                     <LockOutlined/>
                 </Avatar>
                 <Typography variant={"h5"}>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
-                <form className={classes.form} onSubmit={()=> handleSubmit()}>
+                <form className={classes.form} onSubmit={(event)=> handleSubmit(event)}>
                     <Grid container spacing={2} style={{ marginBottom: '20px'}}>
                         {
                             isSignUp && (
                                 <>
-                                    <Input name={'firstName'} label={"First name"} handleChange={()=> handleChange()} autoFocus half />
-                                    <Input name={'lastName'} label={"Last name"} handleChange={()=> handleChange()} half />
+                                    <Input name={'firstName'} label={"First name"} handleChange={handleChange} autoFocus half />
+                                    <Input name={'lastName'} label={"Last name"} handleChange={handleChange} half />
                                 </>
                             )
                         }
-                        <Input name={'email'} label={"Email address"} handleChange={()=> handleChange()} type={'email'} />
-                        <Input name={'password'} label={'Password'} handleChange={() => handleSubmit()} type={showPassword ? "text" : "password"} handleShowPassword={() => handleShowPassword()} />
-                        { isSignUp && <Input name={"confirmPassword"} label={"Repeat password"} handleChange={() => handleChange()} type={"password"}/>}
+                        <Input name={'email'} label={"Email address"} handleChange={handleChange} type={'email'} />
+                        <Input name={'password'} label={'Password'} handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
+                        { isSignUp && <Input name={"confirmPassword"} label={"Repeat password"} handleChange={handleChange} type={"password"}/>}
                     </Grid>
                     <Button type={"submit"} fullWidth variant={"contained"} color={"primary"} className={classes.submit}>
                         {isSignUp ? "Sign Up" : 'Sign In'}

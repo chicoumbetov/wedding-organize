@@ -26,7 +26,7 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-        const token = user?.token;
+        // const token = user?.token;
 
         // Check JSON Web Token
 

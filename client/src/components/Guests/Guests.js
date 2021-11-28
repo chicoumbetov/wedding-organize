@@ -1,7 +1,7 @@
 import React from "react";
 import useStyles from './styles'
 import {useSelector} from "react-redux";
-import {Card, CircularProgress, Grid, Typography} from "@material-ui/core";
+import { CircularProgress, Grid, Typography} from "@material-ui/core";
 import Guest from "./Guest/Guest";
 
 
@@ -20,9 +20,9 @@ const Guests = ({ setCurrentId }) => {
                         <div style={{ display: 'flex', marginLeft: '20px', marginTop: '20px' }}>
                             <Typography style={{ width: '200px', marginRight: '10px'}} variant={"h6"}>Name</Typography>
                             &nbsp;
-                            <Typography variant={"h6"} className={[classes.title]} gutterBottom>Guests</Typography>
+                            <Typography variant={"h6"} className={classes.title} gutterBottom>Guests</Typography>
                             &nbsp;
-                            <Typography variant={"h6"} component={"p"} gutterBottom className={classes.message}>RON</Typography>
+                            <Typography variant={"h6"} className={classes.message} component={"p"} gutterBottom >RON</Typography>
                             &nbsp;
                             <Typography variant={"h6"} className={classes.message}>RON</Typography>
                         </div>
