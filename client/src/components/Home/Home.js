@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import useStyles from "../../styles";
 import {useDispatch} from "react-redux";
 import {getPosts} from "../../actions/posts";
+import Paginate from "../Pagination";
 // import Guests from "../Guests/Guests";
 
 const Home = () => {
@@ -35,6 +36,7 @@ const Home = () => {
                         <Form currentId={currentId} setCurrentId={setCurrentId}/>
                     </Grid>
                 </Grid>
+                <Paginate/>
                 <Grid item xs={12}
                       // sm={7}
                 >
