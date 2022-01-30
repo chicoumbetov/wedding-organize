@@ -28,8 +28,11 @@ const Post = ({ post, setCurrentId }) => {
         return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
     };
 
+    console.log("googleId ", user?.result?.googleId)
+    console.log("post ", post)
+    console.log("post?.creator", post?.creator)
     return(
-        <Card className={classes.card}>
+        <Card className={classes.card} raised elevation={6}>
             {post ? (
                 <>
                     <CardMedia className={classes.media}

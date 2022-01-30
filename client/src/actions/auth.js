@@ -27,3 +27,11 @@ export const signup = (formData, history) => async (dispatch) => {
         console.log(e)
     }
 }
+
+export const updateUser = () => async ()=> {
+    try {
+        console.log("updateUser")
+    } catch (e) {
+        console.log(e)
+    }
+}

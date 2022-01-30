@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {AppBar, Avatar, Button, Toolbar, Typography} from "@material-ui/core";
-import memories from "../../assets/images/images.jpeg";
+// import memories from "../../assets/images/images.jpeg";
+import groupomaniaLogo from "../../assets/images/Groupomania_Logos+(3)/icon-left-font-monochrome-black.svg";
 import useStyles from "./styles";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -12,8 +13,8 @@ const Navbar = () => {
     const classes = useStyles();
 
     const [ user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')))
-    const dispatch = useDispatch()
-    const history = useNavigate()
+    const dispatch = useDispatch();
+    const history = useNavigate();
     const location = useLocation()
 
     console.log("user:", user)
@@ -44,14 +45,18 @@ const Navbar = () => {
         <AppBar className={classes.appBar} position={"static"} color={"inherit"}>
             <div className={classes.brandContainer}>
                 <Typography component={Link} to={'/'} className={classes.heading} variant={"h2"} align={"center"}>
-                    Wedding
+                    <img className={classes.image} src={groupomaniaLogo} alt={"memories"} height={"60"}/>
                 </Typography>
-                <img className={classes.image} src={memories} alt={"memories"} height={"60"}/>
+            </div>
+            <div>
+                <Typography component={Link} to={'/profile'} className={classes.heading} variant={"h2"} align={"center"}>
+                    Profile
+                </Typography>
             </div>
             <Toolbar className={classes.toolbar}>
                 {user
                     ? (<div className={classes.profile}>
-                        <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl} >
+                        <Avatar component={Link} to={'/profile'} className={classes.purple} alt={user.result.name} src={user.result.imageUrl} >
                             {user.result.name.charAt(0)}
                         </Avatar>
                         <Typography className={classes.userName} variant={'h6'}>

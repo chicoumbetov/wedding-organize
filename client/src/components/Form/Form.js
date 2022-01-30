@@ -56,7 +56,7 @@ const Form = ({ currentId, setCurrentId }) => {
     return(
         <Paper className={classes.paper}>
             <form autoComplete={"off"} noValidate className={`${classes.root} ${classes.form}`} onSubmit={(data)=> handleSubmit(data)}>
-                <Typography variant={"h6"}>{currentId ? 'Editing' : 'Creating'} a guest</Typography>
+                <Typography variant={"h6"}>{currentId ? 'Editing' : 'Creating'} a post</Typography>
                 {/**
                 <TextField
                     name={"creator"}
@@ -73,7 +73,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField
                     name={"title"}
                     variant={"outlined"}
-                    label={"Number of persons"}
+                    label={"Post title"}
                     fullWidth
                     value={postData.title}
                     onChange={(event) => setPostData(
@@ -85,7 +85,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField
                     name={"message"}
                     variant={"outlined"}
-                    label={"Expenses X"}
+                    label={"Post description"}
                     fullWidth
                     value={postData.message}
                     onChange={(event) => setPostData(
@@ -97,7 +97,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField
                     name={"tags"}
                     variant={"outlined"}
-                    label={"Expenses Y"}
+                    label={"Tags"}
                     fullWidth
                     value={postData.tags}
                     onChange={(event) => setPostData(
