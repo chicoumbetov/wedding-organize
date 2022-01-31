@@ -11,7 +11,7 @@ import {Skeleton} from "@mui/material";
 const Post = ({ post, setCurrentId }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
-    console.log("post.name:", post)
+    // console.log("post.name:", post)
 
     const user = JSON.parse(localStorage.getItem('profile'));
 
@@ -28,9 +28,9 @@ const Post = ({ post, setCurrentId }) => {
         return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
     };
 
-    console.log("googleId ", user?.result?.googleId)
-    console.log("post ", post)
-    console.log("post?.creator", post?.creator)
+    // console.log("googleId ", user?.result?.googleId)
+    // console.log("post ", post)
+    // console.log("post?.creator", post?.creator)
     return(
         <Card className={classes.card} raised elevation={6}>
             {post ? (

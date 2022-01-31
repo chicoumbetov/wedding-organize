@@ -18,7 +18,7 @@ export const signup = (formData, history) => async (dispatch) => {
     try {
         // sign up the user ...
         const { data } = await api.signUp(formData)
-        console.log("data:", data)
+        // console.log("data:", data)
 
         dispatch({ type: AUTH, data })
 

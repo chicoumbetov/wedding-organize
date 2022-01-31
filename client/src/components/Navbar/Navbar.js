@@ -17,7 +17,7 @@ const Navbar = () => {
     const history = useNavigate();
     const location = useLocation()
 
-    console.log("user:", user)
+    // console.log("user:", user)
 
     const logout = () => {
         dispatch({ type: 'LOGOUT' })
@@ -50,7 +50,7 @@ const Navbar = () => {
             </div>
             <div>
                 <Typography component={Link} to={'/profile'} className={classes.heading} variant={"h2"} align={"center"}>
-                    Profile
+                    PROFILE
                 </Typography>
             </div>
             <Toolbar className={classes.toolbar}>
