@@ -7,7 +7,14 @@ export default makeStyles((theme) => ({
         },
     },
     gridContainer: {
-
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column-reverse',
+        }
+    },
+    pagination: {
+      borderRadius: 4,
+      marginTop: '1rem',
+      padding: '16px',
     },
     appBar: {
         borderRadius: 15,
@@ -17,6 +24,12 @@ export default makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    appBarSearch: {
+        margin: '30px 0',
+        display: "flex",
+        padding: '16px',
+        borderRadius:10,
+    },
     heading: {
         fontWeight: 600,
         color: 'rgba(0,183,255, 1)',
@@ -25,6 +38,9 @@ export default makeStyles((theme) => ({
     image: {
         marginLeft: '15px',
         borderRadius: '50%'
+    },
+    searchButton: {
+        marginTop: '20px!important'
     }
 
 }));

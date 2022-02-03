@@ -8,7 +8,7 @@ export default makeStyles((theme) => ({
     },
     paper: {
         padding: theme.spacing(2),
-        borderRadius: '20px'
+        borderRadius: '10px'
     },
     form: {
         display: 'flex',
