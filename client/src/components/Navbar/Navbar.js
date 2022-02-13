@@ -52,6 +52,9 @@ const Navbar = () => {
                 <Typography component={Link} to={'/profile'} className={classes.heading} variant={"h2"} align={"center"}>
                     PROFILE
                 </Typography>
+                <Typography component={Link} to={'/admin'} className={classes.heading} variant={"h2"} align={"center"}>
+                    ADMIN
+                </Typography>
             </div>
             <Toolbar className={classes.toolbar}>
                 {user

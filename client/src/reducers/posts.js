@@ -9,27 +9,32 @@ import {
     UPDATE
 } from "../constants/actionTypes";
 
-const reducer = (posts = [], action) => {
-    if(action && action.payload && posts) {
-        // console.log("reducer id id:",posts, action.payload._id)
-        // console.log("likes:",posts.likes)
-        console.log("action:",action)
+const reducer = (state = [], action) => {
+    if(action && action.payload && state) {
+        // console.log("reducer id id:",state, action.payload._id)
+        // console.log("likes:",state.likes)
+        // console.log("action:",action)
     }
     switch (action.type) {
 
         case CREATE:
-            return [ ...posts, action.payload];
+            return [ ...state, action.payload];
         case FETCH_ALL:
-            return action.payload;
+            return {
+                ...state,
+                posts: action.payload.data,
+                currentPage: action.payload.currentPage,
+                numberOfPages: action.payload.numberOfPages,
+            }
         case FETCH_BY_SEARCH:
-            return action.payload;
+            return { ...state, state: action.payload };
         case UPDATE:
-            return posts.map((post) =>  post._id === action.payload._id ? action.payload : post);
+            return state.map((post) =>  post._id === action.payload._id ? action.payload : post);
         case DELETE:
-            return posts.filter((post) => post._id !== action.payload._id);
+            return state.filter((post) => post._id !== action.payload._id);
 
         default:
-            return posts;
+            return state;
     }
 }
 

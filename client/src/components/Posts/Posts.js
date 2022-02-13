@@ -4,15 +4,17 @@ import useStyles from './styles'
 import {useSelector} from "react-redux";
 import { Grid} from "@material-ui/core";
 
-
 const Posts = ({ setCurrentId }) => {
-    const posts = useSelector((state) => state.posts )
+    const { posts } = useSelector((state) => {
+        // console.log(state)
+        return state.posts
+    } )
     const classes = useStyles();
 
-    // console.log("posts:", posts)
+    // console.log("posts:", posts, numberOfPages)
 
     return(
-        !posts.length
+        !posts?.length
             ? (<>
                 {/**<CircularProgress value={75} color={"primary"} />*/}
                 <div>No posts yet</div>

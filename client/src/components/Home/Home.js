@@ -1,10 +1,10 @@
 import {AppBar, Container, Grid, Grow, TextField} from "@material-ui/core";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import useStyles from "../../styles";
 import {useDispatch} from "react-redux";
-import {getPosts, getPostsBySearch} from "../../actions/posts";
+import { getPostsBySearch} from "../../actions/posts";
 import Paginate from "../Pagination";
 import { useLocation, useNavigate} from "react-router-dom";
 import {Button} from "@mui/material";
@@ -26,9 +26,11 @@ const Home = () => {
     const [search, setSearch] = useState('');
     // const [tags, setTags] = useState([]);
     // console.log("dispatch", dispatch(getPosts()))
+    /**
     useEffect(()=> {
         dispatch(getPosts())
     }, [dispatch])
+     */
 
     const searchPost = () => {
         // if (search.trim() || tags) {

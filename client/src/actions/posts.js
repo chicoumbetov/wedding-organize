@@ -5,9 +5,9 @@ import {CREATE, FETCH_ALL, UPDATE, DELETE,
 } from '../constants/actionTypes'
 
 // Action creators
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
     try {
-        const { data } = await api.fetchPosts()
+        const { data } = await api.fetchPosts(page)
         // console.log("daaata", data)
 
         const action = { type: FETCH_ALL, payload: data }
