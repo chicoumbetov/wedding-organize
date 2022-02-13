@@ -1,18 +1,22 @@
 import * as api from '../api'
 import {CREATE, FETCH_ALL, UPDATE, DELETE,
     FETCH_BY_SEARCH,
-    // START_LOADING,  END_LOADING
+    START_LOADING,  END_LOADING
 } from '../constants/actionTypes'
 
 // Action creators
 export const getPosts = (page) => async (dispatch) => {
     try {
-        const { data } = await api.fetchPosts(page)
+        // console.log("dispatch in")
+        dispatch({ type: START_LOADING });
+        // console.log("dispatch out")
+        const { data } = await api.fetchPosts(page);
         // console.log("daaata", data)
 
         const action = { type: FETCH_ALL, payload: data }
 
         dispatch(action)
+        dispatch({ type: END_LOADING })
     } catch (error) {
         console.log(error.message)
     }
@@ -21,14 +25,14 @@ export const getPosts = (page) => async (dispatch) => {
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     console.log("getPostsBySearch searchQuery", searchQuery);
     try {
-        // dispatch({ type: START_LOADING });
+        dispatch({ type: START_LOADING });
         // const {data: { data }} = await api.fetchPostsBySearch(searchQuery.search);
         const {data: { data }} = await api.fetchPostsBySearch(searchQuery);
 
         // console.log("variableTest by search:", data)
         console.log("data by search:", data);
         dispatch({ type: FETCH_BY_SEARCH, payload: data });
-        // dispatch({ type: END_LOADING });
+        dispatch({ type: END_LOADING });
     } catch (error) {
         console.log("error:", error);
     }
@@ -46,9 +50,12 @@ export const getPost = () => async (dispatch) => {
 
 export const createPost = (post) => async (dispatch) => {
     try {
-     const { data } = await api.createPost(post)
+        dispatch({ type: START_LOADING })
 
-     dispatch({ type: CREATE, payload: data})
+        const { data } = await api.createPost(post)
+        dispatch({ type: CREATE, payload: data})
+        dispatch({ type: END_LOADING })
+
     }  catch (error) {
         console.log(error.message)
     }

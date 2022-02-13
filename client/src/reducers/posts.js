@@ -1,24 +1,27 @@
 import {
     CREATE,
-    DELETE,
+    DELETE, END_LOADING,
     // END_LOADING,
     FETCH_ALL,
-    FETCH_BY_SEARCH,
+    FETCH_BY_SEARCH, START_LOADING,
     // FETCH_POST,
     // START_LOADING,
     UPDATE
 } from "../constants/actionTypes";
 
-const reducer = (state = [], action) => {
+const reducer = (state = { isLoading: true, posts: [] }, action) => {
     if(action && action.payload && state) {
         // console.log("reducer id id:",state, action.payload._id)
         // console.log("likes:",state.likes)
         // console.log("action:",action)
+        console.log("state:",state)
     }
     switch (action.type) {
+        case START_LOADING:
+            return { ...state, isLoading: true }
+        case END_LOADING:
+            return { ...state, isLoading: false }
 
-        case CREATE:
-            return [ ...state, action.payload];
         case FETCH_ALL:
             return {
                 ...state,
@@ -27,11 +30,14 @@ const reducer = (state = [], action) => {
                 numberOfPages: action.payload.numberOfPages,
             }
         case FETCH_BY_SEARCH:
-            return { ...state, state: action.payload };
+            return { ...state, posts: action.payload };
+
+        case CREATE:
+            return { ...state, posts: [ ...state.posts, action.payload]};
         case UPDATE:
-            return state.map((post) =>  post._id === action.payload._id ? action.payload : post);
+            return { ...state, posts: state.posts.map((post) =>  post._id === action.payload._id ? action.payload : post)}
         case DELETE:
-            return state.filter((post) => post._id !== action.payload._id);
+            return { ...state, posts: state.posts.filter((post) => post._id !== action.payload._id)};
 
         default:
             return state;
