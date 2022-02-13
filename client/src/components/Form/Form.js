@@ -4,12 +4,14 @@ import {Button, Paper, TextField, Typography} from "@material-ui/core";
 import FileBase64 from "react-file-base64";
 import {useDispatch, useSelector} from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
+import {useNavigate} from "react-router-dom";
 
 // GET THE CURRENT ID
 
 const Form = ({ currentId, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch()
+    const history = useNavigate();
     const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId): null)
     const user = JSON.parse(localStorage.getItem('profile'));
 
@@ -29,11 +31,12 @@ const Form = ({ currentId, setCurrentId }) => {
         if(currentId) {
             // dispatch(updatePost(currentId, postData)) // posts without user linking
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name })) // posts linked to users
-
+            clear();
             // console.log("disp:",dispatch(updatePost(currentId, postData)))
         } else {
             // dispatch(createPost(postData))  // posts without user linking
-            dispatch(createPost({ ...postData, name: user?.result?.name })) // posts linked to users
+            dispatch(createPost({ ...postData, name: user?.result?.name },history)) // posts linked to users
+            clear();
         }
         clear()
     }

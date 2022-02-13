@@ -21,13 +21,16 @@ const PostDetails = () => {
 
     useEffect(() => {
         if (post) {
-            dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
+            dispatch(getPostsBySearch({
+                search: 'none',
+                tags: post?.tags.join(',')
+            }));
         }
     }, [post]);
 
     if (!post) return null;
 
-    const openPost = (_id) => history.push(`/posts/${_id}`);
+    const openPost = (_id) => history(`/posts/${_id}`);
 
     if (isLoading) {
         return (
@@ -69,7 +72,7 @@ const PostDetails = () => {
                                 <Typography gutterBottom variant="subtitle2">{name}</Typography>
                                 <Typography gutterBottom variant="subtitle2">{message}</Typography>
                                 <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
-                                <img src={selectedFile} width="200px" />
+                                <img style={{ borderRadius: '5px' }} src={selectedFile} width="200px" />
                             </div>
                         ))}
                     </div>
