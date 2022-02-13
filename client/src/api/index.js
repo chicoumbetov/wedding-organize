@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL: "http://localhost:5001" })
-// const API = axios.create({ baseURL: "https://wedding-react-js.herokuapp.com" })
+const url = "http://localhost:5001";
+// const url = "https://wedding-react-js.herokuapp.com";
+
+const API = axios.create({ baseURL: url })
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('profile')) {
@@ -10,9 +12,6 @@ API.interceptors.request.use((req) => {
 
     return req;
 })
-
-// const url = "http://localhost:5000/posts";
-// const url = "https://wedding-react-js.herokuapp.com/posts";
 
 export const fetchPost = (id) => API.get(`/posts/${id}`);
 export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}`);
