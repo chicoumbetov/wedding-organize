@@ -17,8 +17,9 @@ export default makeStyles((theme) => ({
     heading: {
         color: theme.palette.primary.main,
         textDecoration: 'none',
-        fontSize: '2em',
-        fontWeight: 300,
+
+        fontSize: '1.5em',
+        fontWeight: 700,
     },
     image: {
         marginLeft: '10px',
@@ -56,6 +57,7 @@ export default makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
     },
+    navTitles: { display: 'flex', flex: 1, justifyContent: 'space-around'},
     purple: {
         color: theme.palette.getContrastText(deepPurple[500]),
         backgroundColor: deepPurple[500],

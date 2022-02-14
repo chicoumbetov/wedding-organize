@@ -1,5 +1,6 @@
 const CREATE = 'CREATE'
 const UPDATE = 'UPDATE'
+const COMMENT = 'COMMENT'
 const FETCH_ALL = 'FETCH_ALL'
 const DELETE = 'DELETE'
 
@@ -15,6 +16,7 @@ const LOGOUT = 'LOGOUT'
 export {
     CREATE,
     UPDATE,
+    COMMENT,
     FETCH_ALL,
     DELETE,
     AUTH,

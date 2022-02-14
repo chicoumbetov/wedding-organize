@@ -6,6 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {getPost, getPostsBySearch} from "../../actions/posts";
 import {CircularProgress, Divider, Paper, Typography} from "@material-ui/core";
 import moment from "moment";
+import CommentSection from "./CommentsSection";
 
 const PostDetails = () => {
     const { post, posts, isLoading } = useSelector((state) => state.posts)
@@ -54,7 +55,7 @@ const PostDetails = () => {
                     <Divider style={{ margin: '20px 0' }} />
                     <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
                     <Divider style={{ margin: '20px 0' }} />
-                    <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
+                    <CommentSection post={post}/>
                     <Divider style={{ margin: '20px 0' }} />
                 </div>
                 <div className={classes.imageSection}>

@@ -1,7 +1,7 @@
 import {
     CREATE, UPDATE, DELETE,
     START_LOADING, END_LOADING,
-    FETCH_ALL, FETCH_BY_SEARCH, FETCH_POST,
+    FETCH_ALL, FETCH_BY_SEARCH, FETCH_POST, COMMENT,
 } from "../constants/actionTypes";
 
 const reducer = (state = { isLoading: true, posts: [] }, action) => {
@@ -26,6 +26,14 @@ const reducer = (state = { isLoading: true, posts: [] }, action) => {
             return { ...state, posts: action.payload };
         case FETCH_POST:
             return { ...state, post: action.payload }
+        case COMMENT:
+            return {
+                ...state,
+                posts: state.posts.map((post) => {
+                    if (post._id === action.payload._id) return action.payload;
+                    return post;
+                }),
+            };
 
         case CREATE:
             return { ...state, posts: [ ...state.posts, action.payload]};

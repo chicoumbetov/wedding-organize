@@ -45,15 +45,15 @@ const Navbar = () => {
         <AppBar className={classes.appBar} position={"static"} color={"inherit"}>
             <div className={classes.brandContainer}>
                 <Typography component={Link} to={'/'} className={classes.heading} variant={"h2"} align={"center"}>
-                    <img className={classes.image} src={groupomaniaLogo} alt={"memories"} height={"60"}/>
+                    <img className={classes.image} src={groupomaniaLogo} alt={"memories"} height={"40"}/>
                 </Typography>
             </div>
-            <div>
-                <Typography component={Link} to={'/profile'} className={classes.heading} variant={"h2"} align={"center"}>
-                    PROFILE
+            <div className={classes.navTitles}>
+                <Typography component={Link} to={'/profile'} className={classes.heading} align={"center"}>
+                    Profile
                 </Typography>
-                <Typography component={Link} to={'/admin'} className={classes.heading} variant={"h2"} align={"center"}>
-                    ADMIN
+                <Typography component={Link} to={'/admin'} className={classes.heading} align={"center"}>
+                    Admin
                 </Typography>
             </div>
             <Toolbar className={classes.toolbar}>

@@ -114,8 +114,10 @@ const Form = ({ currentId, setCurrentId }) => {
                         { ...postData, selectedFile: base64}
                     )}/>
                 </div>
-                <Button className={classes.buttonSubmit} variant={"contained"} color={"primary"} size={"large"} type={"submit"} fullWidth>Submit</Button>
-                <Button onClick={() => clear()} variant={"contained"} color={"secondary"} size={"small"} type={"clear"} fullWidth>Clear</Button>
+                <div className={classes.buttonsForm}>
+                    <Button className={[classes.buttonSubmit, classes.button]} variant={"contained"} color={"primary"} size={"large"} type={"submit"} fullWidth>Submit</Button>
+                    <Button className={classes.button} onClick={() => clear()} variant={"contained"} color={"secondary"} size={"small"} type={"clear"} fullWidth>Clear</Button>
+                </div>
             </form>
         </Paper>
     )

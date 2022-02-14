@@ -7,6 +7,7 @@ import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import Auth from "./components/Auth/Auth";
 import Profile from "./components/Profile/Profile";
 import PostDetails from "./components/PostDetails/PostDetails";
+import Admin from "./components/Admin/Admin";
 
 export default App;
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path={'/posts/search'} exact element={<Home/>}/>
                     <Route path={'/posts/:id'} exact element={<PostDetails/>}/>
                     <Route path={'/profile'} exact element={<Profile/>}/>
+                    <Route path={'/admin'} exact element={<Admin/>}/>
                     <Route path={'/auth'} exact
                            element={!user ? <Auth/> : <Navigate to={"/posts"}/>}
                     />
