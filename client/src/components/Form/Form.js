@@ -58,7 +58,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
     return(
         <Paper className={classes.paper}>
-            <form autoComplete={"off"} noValidate className={`${classes.root} ${classes.form}`} onSubmit={(data)=> handleSubmit(data)}>
+            <form autoComplete={"off"} noValidate className={[classes.root,classes.form]} onSubmit={(data)=> handleSubmit(data)}>
                 <Typography variant={"h6"}>{currentId ? 'Editing' : 'Creating'} a post</Typography>
                 {/**
                 <TextField
@@ -115,7 +115,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     )}/>
                 </div>
                 <div className={classes.buttonsForm}>
-                    <Button className={[classes.buttonSubmit, classes.button]} variant={"contained"} color={"primary"} size={"large"} type={"submit"} fullWidth>Submit</Button>
+                    <Button className={`${classes.buttonSubmit} ${classes.button}`} variant={"contained"} color={"primary"} size={"large"} type={"submit"} fullWidth>Submit</Button>
                     <Button className={classes.button} onClick={() => clear()} variant={"contained"} color={"secondary"} size={"small"} type={"clear"} fullWidth>Clear</Button>
                 </div>
             </form>

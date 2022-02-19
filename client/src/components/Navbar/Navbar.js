@@ -49,17 +49,17 @@ const Navbar = () => {
                 </Typography>
             </div>
             <div className={classes.navTitles}>
-                <Typography component={Link} to={'/profile'} className={classes.heading} align={"center"}>
+                <Typography component={Link} to={'/users/:id'} className={classes.heading} align={"center"}>
                     Profile
                 </Typography>
-                <Typography component={Link} to={'/admin'} className={classes.heading} align={"center"}>
+                <Typography component={Link} to={'/users'} className={classes.heading} align={"center"}>
                     Admin
                 </Typography>
             </div>
             <Toolbar className={classes.toolbar}>
                 {user
                     ? (<div className={classes.profile}>
-                        <Avatar component={Link} to={'/profile'} className={classes.purple} alt={user.result.name} src={user.result.imageUrl} >
+                        <Avatar component={Link} to={'/users/:id'} className={classes.purple} alt={user.result.name} src={user.result.imageUrl} >
                             {user.result.name.charAt(0)}
                         </Avatar>
                         <Typography className={classes.userName} variant={'h6'}>

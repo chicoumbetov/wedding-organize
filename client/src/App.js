@@ -23,10 +23,14 @@ function App() {
                     <Route path={'/posts'} exact element={<Home/>}/>
                     <Route path={'/posts/search'} exact element={<Home/>}/>
                     <Route path={'/posts/:id'} exact element={<PostDetails/>}/>
-                    <Route path={'/profile'} exact element={<Profile/>}/>
-                    <Route path={'/admin'} exact element={<Admin/>}/>
-                    <Route path={'/auth'} exact
-                           element={!user ? <Auth/> : <Navigate to={"/posts"}/>}
+                    <Route path={'/users/:id'} exact element={<Profile/>}/>
+                    <Route path={'/users'} exact element={<Admin/>}/>
+                    <Route path={'/auth'}
+                           element={
+                               !user
+                               ? <Auth/>
+                               : <Navigate to={"/posts"}/>
+                           }
                     />
                 </Routes>
             </Container>

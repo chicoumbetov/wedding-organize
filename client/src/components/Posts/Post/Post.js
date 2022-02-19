@@ -16,7 +16,9 @@ const Post = ({ post, setCurrentId }) => {
     // console.log("post.name:", post)
     const [likes, setLikes] = useState(post?.likes)
 
-    const userId = user?.result?.googleId || user?.result?._id;
+    const user = JSON.parse(localStorage.getItem('profile'));
+
+    const userId = (user && user.result && user.result.googleId) || (user && user.result && user.result._id);
     const hasLikePost = post.likes.find((like) => like === userId);
 
     const handleLike = async () => {
@@ -29,7 +31,6 @@ const Post = ({ post, setCurrentId }) => {
         }
     }
 
-    const user = JSON.parse(localStorage.getItem('profile'));
 
     const Likes = () => {
         if (likes.length > 0) {
@@ -54,7 +55,8 @@ const Post = ({ post, setCurrentId }) => {
                 {post ? (
                     <ButtonBase className={classes.cardAction} onClick={() => openPost()}>
                         <CardMedia className={classes.media}
-                                   image={post.selectedFile  || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title}
+                                   image={post.selectedFile  || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
+                                   title={post.title}
                         />
                         <div className={classes.overlay}>
                             <Typography variant={"h6"}>{post.name}</Typography>
@@ -64,10 +66,15 @@ const Post = ({ post, setCurrentId }) => {
                 ) : (<Skeleton className={classes.media}/>)}
                 <div className={classes.overlay2}>
                     {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button style={{ color: 'white'}} size={"small"} onClick={(e) => {
-                        e.stopPropagation();
-                        setCurrentId(post._id);
-                    }}>
+                    <Button
+                        style={{ color: 'white'}} size={"small"}
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setCurrentId(post._id);
+                            }
+                        }
+                    >
                         <MoreHoriz />
                     </Button>
                     )}

@@ -18,10 +18,12 @@ function useQuery() {
 const Home = () => {
     const classes = useStyles();
     const [ currentId, setCurrentId] = useState(null);
-    const query = useQuery();
     const history = useNavigate();
-    const page = query.get('page') || 1;
+
+    const query = useQuery();
     const searchQuery = query.get('searchQuery');
+
+    const page = query.get('page') || 1;
     const dispatch = useDispatch()
     const [search, setSearch] = useState('');
     // const [tags, setTags] = useState([]);

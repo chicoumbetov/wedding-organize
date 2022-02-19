@@ -1,0 +1,28 @@
+import {
+    START_LOADING, END_LOADING,
+    FETCH_USERS, FETCH_ONE_USER
+} from "../constants/actionTypes";
+
+const reducer = (state = { isLoading: true, users: [] }, action) => {
+    // if(action && action.payload && state) {
+        // console.log("action reducer user.js:",action.payload)
+        // console.log("action type reducer user.js:",action.type)
+        console.log("state:",state)
+    // }
+    switch (action.type) {
+        case START_LOADING:
+            return { ...state, isLoading: true }
+        case END_LOADING:
+            return { ...state, isLoading: false }
+
+        case FETCH_USERS:
+            return { ...state, users: action.payload.data }
+        case FETCH_ONE_USER:
+            return { ...state, user: action.payload }
+
+        default:
+            return state;
+    }
+}
+
+export default reducer;

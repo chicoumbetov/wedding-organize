@@ -5,10 +5,10 @@ import {
 } from "../constants/actionTypes";
 
 const reducer = (state = { isLoading: true, posts: [] }, action) => {
-    if(action && action.payload && state) {
-        // console.log("action:",action)
-        console.log("state:",state)
-    }
+    // if(action && action.payload && state) {
+        // console.log("action posts.js:",action)
+        // console.log("state:",state)
+    // }
     switch (action.type) {
         case START_LOADING:
             return { ...state, isLoading: true }

@@ -10,7 +10,7 @@ import CommentSection from "./CommentsSection";
 
 const PostDetails = () => {
     const { post, posts, isLoading } = useSelector((state) => state.posts)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const classes = useStyles();
     const history = useNavigate();
 
@@ -18,7 +18,7 @@ const PostDetails = () => {
 
     useEffect(() => {
         dispatch(getPost(id));
-    }, [id]);
+    }, [id, dispatch]);
 
     useEffect(() => {
         if (post) {
@@ -27,7 +27,7 @@ const PostDetails = () => {
                 tags: post?.tags.join(',')
             }));
         }
-    }, [post]);
+    }, [post, dispatch]);
 
     if (!post) return null;
 
@@ -73,7 +73,7 @@ const PostDetails = () => {
                                 <Typography gutterBottom variant="subtitle2">{name}</Typography>
                                 <Typography gutterBottom variant="subtitle2">{message}</Typography>
                                 <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
-                                <img style={{ borderRadius: '5px' }} src={selectedFile} width="200px" />
+                                <img style={{ borderRadius: '5px' }} src={selectedFile} width="200px" alt={"file"}/>
                             </div>
                         ))}
                     </div>

@@ -13,6 +13,9 @@ export const START_LOADING = 'START_LOADING';
 const AUTH = 'AUTH'
 const LOGOUT = 'LOGOUT'
 
+export const FETCH_USERS = 'FETCH_USERS';
+export const FETCH_ONE_USER = 'FETCH_ONE_USER';
+
 export {
     CREATE,
     UPDATE,
@@ -20,5 +23,8 @@ export {
     FETCH_ALL,
     DELETE,
     AUTH,
-    LOGOUT
+    LOGOUT,
+
+    // FETCH_USERS,
+    // FETCH_ONE_USER
 }

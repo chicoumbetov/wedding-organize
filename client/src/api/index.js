@@ -24,5 +24,8 @@ export const updatePost = (id, updatedPostData) => API.patch(`/posts/${id}`, upd
 export const comment = (value, id) => API.post(`/posts/${id}/commentPost`, { value });
 export const deletePost = (id) => API.delete(`posts/${id}`)
 
-export const signIn = (formData) => API.post("/user/signin", formData)
-export const signUp = (formData) => API.post("/user/signup", formData)
+export const signIn = (formData) => API.post("/auth/signin", formData)
+export const signUp = (formData) => API.post("/auth/signup", formData)
+
+export const getUsers = () => API.get("users");
+export const getOneUser = (id) => API.get(`/users/${id}`);

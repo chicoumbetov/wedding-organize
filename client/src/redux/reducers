@@ -1,0 +1,6 @@
+import { combineReducers } from "redux";
+import postsSlice from './postsSlice'
+import authSlice from "./authSlice";
+import usersSlice from "./usersSlice";
+
+export default combineReducers({ postsSlice, authSlice, usersSlice })
