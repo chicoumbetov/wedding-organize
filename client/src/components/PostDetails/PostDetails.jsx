@@ -3,13 +3,17 @@ import React, {useEffect} from 'react'
 import useStyles from "./styles";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
-import {getPost, getPostsBySearch} from "../../actions/posts";
-import {CircularProgress, Divider, Paper, Typography} from "@material-ui/core";
+// import {getPost, getPostsBySearch} from "../../actions/posts";
+import { Divider, Paper, Typography} from "@material-ui/core";
 import moment from "moment";
 import CommentSection from "./CommentsSection";
+import {getOnePost, getPostsBySearch} from "../../redux/postsSlice";
 
 const PostDetails = () => {
-    const { post, posts, isLoading } = useSelector((state) => state.posts)
+    const { post, posts, isLoading } = useSelector((state) => {
+        // console.log("state?.postsSlice:", state?.postsSlice)
+        return state?.postsSlice
+    })
     const dispatch = useDispatch();
     const classes = useStyles();
     const history = useNavigate();
@@ -17,7 +21,8 @@ const PostDetails = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch(getPost(id));
+        console.log("getOnePost", id)
+        dispatch(getOnePost(id));
     }, [id, dispatch]);
 
     useEffect(() => {
@@ -33,6 +38,7 @@ const PostDetails = () => {
 
     const openPost = (_id) => history(`/posts/${_id}`);
 
+    /**
     if (isLoading) {
         return (
             <Paper elevation={6} className={classes.loadingPaper}>
@@ -40,8 +46,16 @@ const PostDetails = () => {
             </Paper>
         );
     }
+    */
 
-    const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+    // console.log("posts", posts.data)
+    // console.log("post", post)
+    let recommendedPosts;
+    if(posts.data) {
+        recommendedPosts = posts.data.filter(({ _id }) => _id !== post._id);
+    } else {
+        recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+    }
 
     return(
         <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>

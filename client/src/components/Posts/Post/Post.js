@@ -13,7 +13,7 @@ const Post = ({ post, setCurrentId }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
     const history = useNavigate()
-    // console.log("post.name:", post)
+    // console.log("post :", post)
     const [likes, setLikes] = useState(post?.likes)
 
     const user = JSON.parse(localStorage.getItem('profile'));
@@ -22,7 +22,7 @@ const Post = ({ post, setCurrentId }) => {
     const hasLikePost = post.likes.find((like) => like === userId);
 
     const handleLike = async () => {
-        dispatch(likePost(post._id))
+        // dispatch(likePost(post._id))
 
         if(hasLikePost) {
             setLikes(post.likes.filter((id) => id !== userId ))

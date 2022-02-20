@@ -5,8 +5,8 @@ import {
 
 const reducer = (state = { isLoading: true, users: [] }, action) => {
     // if(action && action.payload && state) {
-        // console.log("action reducer user.js:",action.payload)
-        // console.log("action type reducer user.js:",action.type)
+        // console.log("action reducer user:",action.payload)
+        // console.log("action type reducer user:",action.type)
         console.log("state:",state)
     // }
     switch (action.type) {

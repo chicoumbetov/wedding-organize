@@ -1,53 +1,101 @@
-import {createSlice} from "@reduxjs/toolkit";
-/*
-import {
-    commentPost,
-    createPost,
-    deletePost,
-    getPost,
-    getPosts,
-    getPostsBySearch,
-    likePost,
-    updatePost
-} from "../actions/posts";
-*/
-import {END_LOADING, FETCH_ALL, FETCH_POST, START_LOADING} from "../constants/actionTypes";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import * as api from "../api";
+
+export const getPosts = createAsyncThunk(
+    "posts/fetchPosts",
+    async (page) => {
+        try {
+            const { data } = await api.fetchPosts(page);
+            // console.log("getPosts:", data)
+            return data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
+export const getOnePost = createAsyncThunk(
+    "posts/fetchOnePost",
+    async (id) => {
+        try {
+            const { data } = await api.fetchPost(id);
+            // console.log("data: ", data)
+            return data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
+export const getPostsBySearch = createAsyncThunk(
+    "posts/fetchPostsBySearch",
+    async (searchQuery) => {
+        const {data } = await api.fetchPostsBySearch(searchQuery);
+        // console.log("fetch getPostsBySearch", data)
+        return data
+    }
+)
 
 const postsSlice = createSlice({
     name: 'posts',
-    initialState: [],
+    initialState: { isLoading: true, posts: [] },
     reducers: {
-        /*
-        getPost: (state, action) => {
-            state.post = [ ...state, {id: state.post.id, post: action.payload} ]
+        fetchOnePost: (state, action) => {
+            state.post = action.payload
         },
-        */
-        getPosts: (state, action, page) => async (dispatch) => {
-            console.log('slicer posts:', state, action, page);
-            const { data } = await api.fetchPosts(page);
-
-            return{
-                ...state,
-                posts: data,
-                currentPage: action.payload.currentPage,
-                numberOfPages: action.payload.numberOfPages
-            }
+        fetchPosts(state, action, page) {
+            // console.log('slicer posts:', state, action, page);
+            state.posts = action.payload.data;
+            state.currentPage = action.payload.currentPage;
+            state.numberOfPages = action.payload.numberOfPages
+        },
+        fetchPostsBySearch(state, action) {
+            state.posts = action.payload;
         },
         /*
-        getPostsBySearch,
         createPost,
         updatePost,
         likePost,
         commentPost,
         deletePost
          */
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getPosts.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getPosts.fulfilled, (state, action) => {
+                // console.log("addCase action getPosts:", action);
+                state.posts = action.payload;
+                state.currentPage = action.payload.currentPage;
+                state.numberOfPages = action.payload.numberOfPages
+            })
+            .addCase(getPosts.rejected, (state) => {
+                state.isLoading = false
+            })
+
+            .addCase(getOnePost.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getOnePost.fulfilled, (state, action) => {
+                // console.log("addCase action getOnePost:", action);
+                state.post = action.payload;
+            })
+
+            .addCase(getPostsBySearch.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getPostsBySearch.fulfilled, (state, action) => {
+                // console.log("addCase action getPostsBySearch:", action);
+                state.posts = action.payload;
+            })
     }
 })
 
 export const {
-    getPost, getPosts,
-    getPostsBySearch, createPost, updatePost, likePost, deletePost
+    fetchOnePost, fetchPosts, fetchPostsBySearch,
+    createPost, updatePost, likePost, deletePost
 } = postsSlice.actions;
 
 export default postsSlice.reducer

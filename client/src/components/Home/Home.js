@@ -4,10 +4,11 @@ import Form from "../Form/Form";
 import React, { useState} from "react";
 import useStyles from "../../styles";
 import {useDispatch} from "react-redux";
-import { getPostsBySearch} from "../../actions/posts";
+// import { getPostsBySearch} from "../../actions/posts";
 import Paginate from "../Pagination";
 import { useLocation, useNavigate} from "react-router-dom";
 import {Button} from "@mui/material";
+import {getPostsBySearch} from "../../redux/postsSlice";
 // import Guests from "../Guests/Guests";
 // import ChipInput from 'material-ui-chip-input'
 

@@ -41,7 +41,7 @@ const usersSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getUsers.pending, (state, action) => {
+            .addCase(getUsers.pending, (state) => {
                 state.isLoading = true;
             })
             .addCase(getUsers.fulfilled, (state, action ) => {
@@ -50,7 +50,7 @@ const usersSlice = createSlice({
                 state.users = action.payload
                 // state.users.push(action.payload)
             })
-            .addCase(getOneUser.pending, (state, action) => {
+            .addCase(getOneUser.pending, (state) => {
                 state.isLoading = true;
             })
             .addCase(getOneUser.fulfilled, (state, action ) => {

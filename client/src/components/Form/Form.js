@@ -90,6 +90,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     variant={"outlined"}
                     label={"Post description"}
                     fullWidth
+                    style={{ margin: '30px 0'}}
                     value={postData.message}
                     onChange={(event) => setPostData(
                         {

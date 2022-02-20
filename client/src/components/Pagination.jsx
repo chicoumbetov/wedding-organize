@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
 
-import { getPosts } from '../actions/posts';
+// import { getPosts } from '../actions/posts';
 import useStyles from './styles';
+import {getPosts} from "../redux/postsSlice";
 
 const Paginate = ({ page }) => {
-    const { numberOfPages } = useSelector((state) => state.posts);
-    // console.log(numberOfPages, posts)
+    const { numberOfPages } = useSelector((state) => state.postsSlice);
+    console.log(numberOfPages)
     const dispatch = useDispatch();
 
     const classes = useStyles();
