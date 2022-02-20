@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux";
-import {getUsers} from "../../actions/user";
+// import {getUsers} from "../../actions/user";
+import { getUsers } from "../../redux/usersSlice";
+import {Col, Row} from "react-bootstrap";
 
 // function useQuery() { return new URLSearchParams(useLocation().search) }
 
@@ -17,8 +19,8 @@ const Admin = () => {
     }
     const dispatch = useDispatch();
 
-    const users = useSelector((state) => state.users)
-    console.log("users Admin.js :",users.users, typeof users)
+    const {users} = useSelector((state) => state?.usersSlice)
+    // console.log("users Admin.js :", users, typeof users)
 
     useEffect(() => {
         dispatch(getUsers());
@@ -29,13 +31,9 @@ const Admin = () => {
             user && user.result
             && user.result.isAdmin
         ) {
-            return(<div>
-                Have rights to modify
-            </div>)
+            return(<div> Have rights to modify </div>)
         } else {
-            return(<div>
-                No rights to modify
-            </div>)
+            return(<div> No rights to modify </div>)
         }
     }
 
@@ -43,18 +41,18 @@ const Admin = () => {
         <div>
             {haveRigthToModify()}
             {
-                users && users.users
-                && users.users.map((user) => {
+                users
+                && users.map((user) => {
                     return(
                             React.Children.toArray(
-                                <div style={{ display: 'flex'}}>
-                                    <p style={{ marginRight: "50px"}}>{user.name}</p>
-                                    <p>{user.isAdmin && "Admin"}</p>
-                                </div>
+                                <Row lg={12} style={{ display: 'flex'}}>
+                                    <Col lg={6} style={{ marginRight: "50px"}}>{user.name}</Col>
+                                    <Col lg={6}>{user.isAdmin ? "Admin" : "Not admin"}</Col>
+                                </Row>
                             )
                         )
                 })
-            }
+           }
         </div>
     )
 }

@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from "react"
-import {TextField} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 import FileBase64 from "react-file-base64";
 import {useDispatch, useSelector} from "react-redux";
 import {getOneUser} from "../../actions/user";
+import useStyles from "../Form/styles";
 
 const Profile = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const [ user ] = useState(JSON.parse(localStorage.getItem('profile')))
     if(user && user.result) {
         console.log("user", user.result._id)
-        console.log("user", user.result.isAdmin)
+        // console.log("user", user.result.isAdmin)
         console.log("user", user.result.googleId)
     }
     const { user: useR } = useSelector((state) => state.users)
@@ -19,15 +21,23 @@ const Profile = () => {
         if(user && user.result) {
             dispatch(getOneUser(user.result._id || user.result.googleId));
         }
-    }, [dispatch]);
+    }, [dispatch, user]);
 
     const [userData, setUserData] = useState({
         avatar: '', bio: ''
     })
 
-    const handleSubmit = (data) => {
-        console.log("handle submit:", data)
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log("handle submit:", event)
     }
+
+    const clear = () => {
+        setUserData({
+            avatar: '', bio: ''
+        })
+    }
+
     return (
         <>
 
@@ -37,10 +47,13 @@ const Profile = () => {
                 style={{ objectFit: 'cover', height: '100px', width: '100px', borderRadius: '50%'}}
                 src={user && user.result && user.result.avatar
                 ? user.result.avatar
-                : 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
+                : 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'
+                }
+                alt={"profile avatar"}
             />
 
             <div style={{ marginTop: '20px' }}>Name : {user && user.result.name}</div>
+            <div>Email : {user && user.result.email}</div>
             <div>Bio : {user && user.result.bio}</div>
             <div>Droit admin : {user && user.result.isAdmin ? 'Oui' : 'Non'}</div>
             {useR
@@ -57,7 +70,9 @@ const Profile = () => {
                             fullWidth
                             value={useR && useR.bio}
                             style={{ margin: "30px 0"}}
-                            onChange={(event) => event}
+                            onChange={(event) => setUserData(
+                                { ...userData }
+                            )}
                         />
                         <FileBase64
                             type={"avatar"}
@@ -68,6 +83,10 @@ const Profile = () => {
                                 )
                             }
                         />
+                        <div className={classes.buttonsForm}>
+                            <Button className={`${classes.buttonSubmit} ${classes.button}`} variant={"contained"} color={"primary"} size={"large"} type={"submit"} fullWidth>Submit</Button>
+                            <Button className={classes.button} onClick={() => clear()} variant={"contained"} color={"secondary"} size={"small"} type={"clear"} fullWidth>Clear</Button>
+                        </div>
                     </form>
                 )
             }
