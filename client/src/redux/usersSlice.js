@@ -15,10 +15,17 @@ export const getUsers = createAsyncThunk(
                  }
 )
 
-export const getOneUser = createAsyncThunk("users/fetchOneUser", async (id) => {
-    const {data} = await api.getOneUser(id)
-    return data;
-})
+export const getOneUser = createAsyncThunk(
+    "users/fetchOneUser",
+    async (id) => {
+                    try {
+                        const {data} = await api.getOneUser(id)
+                        return data.data;
+                    } catch (e) {
+                        console.log(e)
+                    }
+                 }
+)
 
 
 const usersSlice = createSlice({

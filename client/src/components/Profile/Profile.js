@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react"
 import {Button, TextField} from "@material-ui/core";
 import FileBase64 from "react-file-base64";
 import {useDispatch, useSelector} from "react-redux";
-import {getOneUser} from "../../actions/user";
+// import {getOneUser} from "../../actions/user";
 import useStyles from "../Form/styles";
+import {getOneUser} from "../../redux/usersSlice";
 
 const Profile = () => {
     const classes = useStyles();
@@ -14,7 +15,7 @@ const Profile = () => {
         // console.log("user", user.result.isAdmin)
         console.log("user", user.result.googleId)
     }
-    const { user: useR } = useSelector((state) => state.users)
+    const { user: useR } = useSelector((state) => state?.usersSlice)
     console.log("useR:", useR)
 
     useEffect(() => {
