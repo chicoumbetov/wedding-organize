@@ -1,11 +1,12 @@
 import * as api from '../api'
 import {
-    CREATE, FETCH_ALL, UPDATE, DELETE,
-    FETCH_BY_SEARCH,
-    START_LOADING, END_LOADING, FETCH_POST, COMMENT
+    CREATE, UPDATE, DELETE,
+    // FETCH_ALL, FETCH_BY_SEARCH, FETCH_POST,
+    START_LOADING, END_LOADING,  COMMENT
 } from '../constants/actionTypes'
 
 // Action creators
+/**
 export const getPost = (id) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
@@ -40,7 +41,7 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
         // const {data: { data }} = await api.fetchPostsBySearch(searchQuery.search);
-        const {data: { data }} = await api.fetchPostsBySearch(searchQuery);
+        const {data: { data }} = await api.fetchPostsBySearchAxios(searchQuery);
 
         // console.log("variableTest by search:", data)
         // console.log("data by search:", data);
@@ -50,6 +51,7 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
         console.log("error:", error);
     }
 };
+*/
 
 export const createPost = (post, history) => async (dispatch) => {
     try {

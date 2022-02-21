@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux";
 // import {getUsers} from "../../actions/user";
-import { getUsers } from "../../redux/usersSlice";
+import { getUsers as getUsersAction } from "../../redux/usersSlice";
 import {Col, Row} from "react-bootstrap";
 
 // function useQuery() { return new URLSearchParams(useLocation().search) }
@@ -23,7 +23,7 @@ const Admin = () => {
     // console.log("users Admin.js :", users, typeof users)
 
     useEffect(() => {
-        dispatch(getUsers());
+        dispatch(getUsersAction());
     }, [dispatch]);
 
     const haveRigthToModify = () => {

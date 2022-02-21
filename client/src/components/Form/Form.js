@@ -3,8 +3,11 @@ import useStyles from "./styles";
 import {Button, Paper, TextField, Typography} from "@material-ui/core";
 import FileBase64 from "react-file-base64";
 import {useDispatch, useSelector} from "react-redux";
-import { createPost, updatePost } from "../../actions/posts";
+import {
+    // createPost,
+    updatePost } from "../../actions/posts";
 import {useNavigate} from "react-router-dom";
+import {createPost as createPostAction} from "../../redux/postsSlice";
 
 // GET THE CURRENT ID
 
@@ -30,12 +33,12 @@ const Form = ({ currentId, setCurrentId }) => {
         // console.log("event", event)
         if(currentId) {
             // dispatch(updatePost(currentId, postData)) // posts without user linking
-            dispatch(updatePost(currentId, { ...postData, name: user?.result?.name })) // posts linked to users
+            // dispatch(updatePost(currentId, { ...postData, name: user?.result?.name })) // posts linked to users
             clear();
             // console.log("disp:",dispatch(updatePost(currentId, postData)))
         } else {
             // dispatch(createPost(postData))  // posts without user linking
-            dispatch(createPost({ ...postData, name: user?.result?.name },history)) // posts linked to users
+            // dispatch(createPostAction({ ...postData, name: user?.result?.name },history)) // posts linked to users
             clear();
         }
         clear()

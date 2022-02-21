@@ -5,11 +5,12 @@ import { Provider } from "react-redux";
 // import reducers from "./redux/reducers"
 import reducer from "./reducers"
 
-import App from './App';
+
 // import {applyMiddleware, compose, createStore} from "redux";
 // import thunk from "redux-thunk";
 import './index.css';
 import {configureStore} from "@reduxjs/toolkit";
+import App from "./App";
 
 // const store = createStore(reducers, compose(applyMiddleware(thunk)))
 let store = configureStore({ reducer })

@@ -22,7 +22,7 @@ const Post = ({ post, setCurrentId }) => {
     const hasLikePost = post.likes.find((like) => like === userId);
 
     const handleLike = async () => {
-        // dispatch(likePost(post._id))
+        dispatch(likePost(post._id))
 
         if(hasLikePost) {
             setLikes(post.likes.filter((id) => id !== userId ))

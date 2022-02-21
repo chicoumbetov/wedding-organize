@@ -28,11 +28,22 @@ export const getOnePost = createAsyncThunk(
 )
 
 export const getPostsBySearch = createAsyncThunk(
-    "posts/fetchPostsBySearch",
+    "posts/getPostsBySearch",
     async (searchQuery) => {
-        const {data } = await api.fetchPostsBySearch(searchQuery);
-        // console.log("fetch getPostsBySearch", data)
+        console.log("getPostsBySearch")
+        const {data } = await api.fetchPostsBySearchAxios(searchQuery);
+        console.log("fetch getPostsBySearch", data)
         return data
+    }
+)
+
+export const createPostThunk = createAsyncThunk(
+    "posts/createPost",
+    async (post, history) => {
+        const { data } = await api.createPost(post)
+        history(`/posts/${data._id}`)
+        console.log(data)
+        return data.data
     }
 )
 
@@ -49,12 +60,17 @@ const postsSlice = createSlice({
             state.currentPage = action.payload.currentPage;
             state.numberOfPages = action.payload.numberOfPages
         },
-        fetchPostsBySearch(state, action) {
+        fetchPostsBySearchAct(state, action) {
+            console.log("fetchPostsBySearchAct")
             state.posts = action.payload;
         },
+        createPost(state, action) {
+            state.posts = [ ...state.posts, action.payload]
+        },
+        updatePost(state, action) {
+            state.posts = state.posts.map((post) =>  post._id === action.payload._id ? action.payload : post)
+        }
         /*
-        createPost,
-        updatePost,
         likePost,
         commentPost,
         deletePost
@@ -83,18 +99,26 @@ const postsSlice = createSlice({
                 state.post = action.payload;
             })
 
+
             .addCase(getPostsBySearch.pending, (state) => {
                 state.isLoading = true
             })
+
             .addCase(getPostsBySearch.fulfilled, (state, action) => {
-                // console.log("addCase action getPostsBySearch:", action);
+                console.log("addCase action getPostsBySearch:", action);
                 state.posts = action.payload;
             })
+
+            .addCase(createPostThunk.fulfilled, (state, action) => {
+                console.log("addCase action createPost:", action);
+                state.posts = action.payload
+            })
+
     }
 })
 
 export const {
-    fetchOnePost, fetchPosts, fetchPostsBySearch,
+    fetchOnePost, fetchPosts, fetchPostsBySearchAct,
     createPost, updatePost, likePost, deletePost
 } = postsSlice.actions;
 

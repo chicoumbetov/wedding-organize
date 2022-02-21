@@ -4,7 +4,7 @@ import FileBase64 from "react-file-base64";
 import {useDispatch, useSelector} from "react-redux";
 // import {getOneUser} from "../../actions/user";
 import useStyles from "../Form/styles";
-import {getOneUser} from "../../redux/usersSlice";
+import {getOneUser as getOneUserAction} from "../../redux/usersSlice";
 
 const Profile = () => {
     const classes = useStyles();
@@ -16,11 +16,11 @@ const Profile = () => {
         console.log("user", user.result.googleId)
     }
     const { user: useR } = useSelector((state) => state?.usersSlice)
-    console.log("useR:", useR)
+    // console.log("useR:", useR)
 
     useEffect(() => {
         if(user && user.result) {
-            dispatch(getOneUser(user.result._id || user.result.googleId));
+            dispatch(getOneUserAction(user.result._id || user.result.googleId));
         }
     }, [dispatch, user]);
 

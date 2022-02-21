@@ -7,7 +7,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import { Divider, Paper, Typography} from "@material-ui/core";
 import moment from "moment";
 import CommentSection from "./CommentsSection";
-import {getOnePost, getPostsBySearch} from "../../redux/postsSlice";
+import {getOnePost as getOnePostAction, getPostsBySearch as getPostsBySearchAction} from "../../redux/postsSlice";
 
 const PostDetails = () => {
     const { post, posts, isLoading } = useSelector((state) => {
@@ -22,12 +22,12 @@ const PostDetails = () => {
 
     useEffect(() => {
         console.log("getOnePost", id)
-        dispatch(getOnePost(id));
+        dispatch(getOnePostAction(id));
     }, [id, dispatch]);
 
     useEffect(() => {
         if (post) {
-            dispatch(getPostsBySearch({
+            dispatch(getPostsBySearchAction({
                 search: 'none',
                 tags: post?.tags.join(',')
             }));

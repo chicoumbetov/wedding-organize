@@ -10,7 +10,7 @@ import {getPosts} from "../redux/postsSlice";
 
 const Paginate = ({ page }) => {
     const { numberOfPages } = useSelector((state) => state.postsSlice);
-    console.log(numberOfPages)
+    // console.log(numberOfPages)
     const dispatch = useDispatch();
 
     const classes = useStyles();
