@@ -1,75 +1,34 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import * as api from "../api";
+import {createSlice} from "@reduxjs/toolkit";
+import {getOnePost, getPosts, getPostsBySearch} from "./thunk";
 
-export const getPosts = createAsyncThunk(
-    "posts/fetchPosts",
-    async (page) => {
-        try {
-            const { data } = await api.fetchPosts(page);
-            // console.log("getPosts:", data)
-            return data
-        } catch (e) {
-            console.log(e)
-        }
-    }
-)
-
-export const getOnePost = createAsyncThunk(
-    "posts/fetchOnePost",
-    async (id) => {
-        try {
-            const { data } = await api.fetchPost(id);
-            // console.log("data: ", data)
-            return data
-        } catch (e) {
-            console.log(e)
-        }
-    }
-)
-
-export const getPostsBySearch = createAsyncThunk(
-    "posts/getPostsBySearch",
-    async (searchQuery) => {
-        console.log("getPostsBySearch")
-        const {data } = await api.fetchPostsBySearchAxios(searchQuery);
-        console.log("fetch getPostsBySearch", data)
-        return data
-    }
-)
-
-export const createPostThunk = createAsyncThunk(
-    "posts/createPost",
-    async (post, history) => {
-        const { data } = await api.createPost(post)
-        history(`/posts/${data._id}`)
-        console.log(data)
-        return data.data
-    }
-)
+import initialState from "./state";
 
 const postsSlice = createSlice({
     name: 'posts',
-    initialState: { isLoading: true, posts: [] },
+    initialState,
     reducers: {
-        fetchOnePost: (state, action) => {
-            state.post = action.payload
-        },
-        fetchPosts(state, action, page) {
+        fetchOnePost: (state, action) => ({
+            ...state,
+            post: action.payload
+        }),
+        fetchPostsAction: (state, action, page) => ({
             // console.log('slicer posts:', state, action, page);
-            state.posts = action.payload.data;
-            state.currentPage = action.payload.currentPage;
-            state.numberOfPages = action.payload.numberOfPages
-        },
-        fetchPostsBySearchAct(state, action) {
-            console.log("fetchPostsBySearchAct")
-            state.posts = action.payload;
-        },
-        createPost(state, action) {
-            state.posts = [ ...state.posts, action.payload]
-        },
-        updatePost(state, action) {
+            ...state,
+            posts: action.payload.data,
+            currentPage: action.payload.currentPage,
+            numberOfPage: action.payload.numberOfPages
+        }),
+        fetchPostsBySearchAction: (state, action) =>({
+            ...state,
+            posts: action.payload,
+        }),
+        createPostAction: (state, action) => ({
+            ...state,
+            posts: action.payload
+        }),
+        updatePostAction: (state, action) => ({
             state.posts = state.posts.map((post) =>  post._id === action.payload._id ? action.payload : post)
-        }
+        })
         /*
         likePost,
         commentPost,

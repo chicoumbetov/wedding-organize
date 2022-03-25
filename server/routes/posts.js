@@ -1,15 +1,19 @@
-import express from "express";
+// controllers
+const { getPostsBySearch, getPost, getPosts, createPost, updatePost, deletePost, likePost, commentPost } = require("../controllers/posts.js");
+const auth = require('../middleware/auth.js');
 
-// functions:
-import { getPosts, createPost, updatePost, deletePost, likePost } from "../controllers/posts.js";
-
+const express = require("express");
 const router = express.Router();
 
 // reached by localhost:5000/posts
+router.get('/search', getPostsBySearch);
 router.get('/', getPosts);
-router.post('/', createPost);
-router.patch('/:id', updatePost);
-router.patch('/:id/likePost', likePost);
-router.delete('/:id', deletePost)
+router.get('/:id', getPost);
 
-export default router
+router.post('/', auth, createPost);
+router.patch('/:id', auth, updatePost);
+router.patch('/:id/likePost', auth, likePost);
+router.post('/:id/commentPost', auth, commentPost);
+router.delete('/:id', auth, deletePost)
+
+module.exports = router;

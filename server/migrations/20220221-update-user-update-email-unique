@@ -1,0 +1,17 @@
+"use strict";
+// INSERT of mysql. CREATE TABLE USER
+module.exports = {
+    up: async (queryInterface, Sequelize) => {
+        await queryInterface.changeColumn("User",
+            'email', {
+                allowNull: false, type: Sequelize.STRING, unique: true
+            });
+    },
+    // on update write vice versa of up. Aim is to come back
+    down: async (queryInterface, Sequelize) => {
+        await queryInterface.changeColumn("User",
+            'email', {
+                allowNull: false, type: Sequelize.STRING, unique: false
+            });
+    },
+};
