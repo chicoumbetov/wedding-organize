@@ -1,0 +1,20 @@
+// import mongoose from "mongoose";
+const mongoose = require('mongoose');
+import uniqueValidator from 'mongoose-unique-validator';
+// const uniqueValidator = require('mongoose-unique-validator');
+
+const guestSchema = mongoose.Schema({
+    id: { type: String},
+    fullname: { type: String, required: true },
+    email: { type: String, unique: true },
+    phoneNumber: { type: String },
+    withSomeone: { type: Boolean },
+    avatar: String,
+    bio: String,
+})
+
+userSchema.plugin(uniqueValidator);
+
+export default mongoose.model("Guest", guestSchema)
+// module.exports = mongoose.model("Guest", guestSchema);
+
