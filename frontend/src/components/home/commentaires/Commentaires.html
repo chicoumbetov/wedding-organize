@@ -1,0 +1,13 @@
+<div>
+    <div class="comment" v-for="(item, index) in $props.comments" :key="index">
+        {{item.content}}
+        <br>
+        <b> par {{item.User.username}}</b>
+        <i v-on:click="admin_remove_comment()" v-if="user.isAdmin == true" class="fas fa-trash-alt"></i>
+
+    </div>
+    <div class="new_comment">
+        <textarea v-model="commentaire" name="" id="" cols="30" rows="10" placeholder="Ecrire un commentaire"></textarea>
+        <button v-on:click="send_comment($event)">Send</button>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div>
+    <div class="row">
+        <div :id="item.id" v-for="(item, index) in articles[0]" :key="index" class="col s12 m3">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title"> {{item.title}}</span>
+                    <p>{{item.content}}</p>
+                </div>
+                <div class="card-action">
+                    <img v-bind:src=item.attachment class="image_style"/>
+                    <Like :like="item.Likes"></Like>
+                    <button :id="item.id" class="com" v-on:click="commentaires_open($event)">Voir les commentaires</button>
+                    <Commentaires :comments="item.Comments"></Commentaires>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+.nav-wrapper{
+    background-color: #000;
+    text-align: left;
+}
+
+.logo{
+    height: 200px;
+    margin-top: -70px;
+    margin-left:20px;
+}
+
+a{
+    font-weight: bold;
+}
+
+a:hover{
+    color:#f57d20;
+}

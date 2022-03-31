@@ -1,0 +1,27 @@
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <img src="../../assets/icon-left-font-monochrome-white.png" class="logo" alt="">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="/">Accueil</a>
+                </li>
+                <li>
+                    <a v-if="is_connect == true" href="/profil">Mon profil</a>
+                </li>
+                <li>
+                    <a v-if="is_admin == true" href="/admin">Admin</a>
+                </li>
+                <li>
+                    <a v-if="is_connect == false" href="/login">S'authentifier</a>
+                </li>
+                <li>
+                    <a v-if="is_connect == false" href="/register">S'inscrire</a>
+                </li>
+                <li>
+                    <a v-if="is_connect == true" v-on:click="logout">Deconnexion</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

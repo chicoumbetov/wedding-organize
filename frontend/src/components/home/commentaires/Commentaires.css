@@ -1,0 +1,10 @@
+.comment{
+    background-color: white;
+    margin-top: 10px;
+}
+.new_comment{
+    margin-top: 10px;
+}
+textarea{
+    background-color: white;
+}
