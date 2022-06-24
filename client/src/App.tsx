@@ -9,12 +9,10 @@ import Profile from "./components/Profile/Profile";
 import PostDetails from "./components/PostDetails/PostDetails";
 import Admin from "./components/Admin/Admin";
 
-
-
 function App() {
-    let user
+    // let user
     if(localStorage) {
-        user = JSON.parse(localStorage.getItem('profile') || '{}');
+        // user = JSON.parse(localStorage.getItem('profile') || '{}');
     }
 
     return (
@@ -28,13 +26,16 @@ function App() {
                     <Route path={'/posts/:id'} element={<PostDetails/>}/>
                     <Route path={'/users/:id'} element={<Profile/>}/>
                     <Route path={'/users'} element={<Admin/>}/>
+
                     <Route path={'/auth'}
-                           element={
-                               !user
-                               ? <Auth/>
-                               : <Navigate to={"/posts"}/>
+                           element={/*
+                               !user || user === {}
+                               ?*/ <Auth/>
+                               /*:
+                                   <Navigate to={"/posts"}/>*/
                            }
                     />
+
                 </Routes>
             </Container>
         </BrowserRouter>

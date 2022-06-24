@@ -1,10 +1,18 @@
 // Backend
 
+// while creating
+1.
+// To create config
+npx sequelize-cli init
+
+generates automatically config, index.tsx in models
+
 // for checking on openclassroom examinator
 2Link tables
    create files in models folder where cascade deletion is managed;
 
 ---
+execute with turn off server nodemon
 npx sequelize-cli db:create // create database according on config.json
 "database": "database_groupomania",
 ---
@@ -21,7 +29,7 @@ to execute migrations files that will create all tables in mysql database workbe
 
 https://sequelize.org/v6/manual/migrations.html
 
-6) npx sequelize-cli db:seed
+6) npx sequelize-cli db:seed:all
 to execute seed files that will fill information in all table that were created on step 4;
 
 7) Generate automatically seed files to fill all created tables in the previous step;
@@ -41,9 +49,3 @@ comment: id_user; id_post; text
 like/dislike: id_user; id_post; swith between them thanks to boolean/tinyint (1/0)
 not good for big scaling -> likes: string, string, string in post table;
 
-// while creating
-1.
-// To create config
-npx sequelize-cli init
-
-generates automatically config, index.js in models

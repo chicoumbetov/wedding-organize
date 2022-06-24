@@ -1,3 +1,4 @@
+/**
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
@@ -31,10 +32,9 @@ module.exports = (sequelize, DataTypes) => {
     );
     return Post;
 };
+*/
 
-
-// MONGO DB Model
-/**
+/**   MONGO DB Model */
 const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
@@ -52,4 +52,3 @@ const postSchema = mongoose.Schema({
 const PostMessage = mongoose.model('PostMessage', postSchema)
 
 module.exports = PostMessage
- */

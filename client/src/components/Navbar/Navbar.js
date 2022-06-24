@@ -8,19 +8,28 @@ import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 
 import decode from 'jwt-decode';
+import {useAppSelector} from "../../store/hooks";
+import {statusSelector, userSelector} from "../../store/selectors";
+
+import {getOneUserThunk} from "../../redux/thunk";
 
 const Navbar = () => {
     const classes = useStyles();
+    const reduxUser = useAppSelector(userSelector);
+    const status = useAppSelector(statusSelector);
 
     const [ user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')))
     const dispatch = useDispatch();
     const history = useNavigate();
     const location = useLocation()
 
-    // console.log("user:", user)
+    useEffect(() => {
+        dispatch(getOneUserThunk(reduxUser?.id))
+    }, [status, dispatch, reduxUser])
 
     const logout = () => {
-        dispatch({ type: 'LOGOUT' })
+        // dispatch({ type: 'LOGOUT' })
+        localStorage.clear()
 
         history('/')
 
@@ -59,11 +68,16 @@ const Navbar = () => {
             <Toolbar className={classes.toolbar}>
                 {user
                     ? (<div className={classes.profile}>
-                        <Avatar component={Link} to={'/users/:id'} className={classes.purple} alt={user.result.name} src={user.result.imageUrl} >
+                        {/**
+                        <Avatar component={Link} to={'/users/:id'} className={classes.purple} alt={user?.result?.name} src={user?.result?.imageUrl} >
                             {user.result.name.charAt(0)}
                         </Avatar>
+                        */}
+                        <Avatar component={Link} to={'/api/users/profile/:id'} className={classes.purple} alt={user.name}>
+                            {user.name}
+                        </Avatar>
                         <Typography className={classes.userName} variant={'h6'}>
-                            {user.result.name}
+                            {user.name/**user.result.name*/}
                         </Typography>
                         <Button variant={"contained"} onClick={logout} className={classes.logout} color={"secondary"}>
                             Sign Out

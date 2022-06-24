@@ -2,16 +2,15 @@ import React, {useEffect, useState} from "react"
 import {Button, TextField} from "@material-ui/core";
 import FileBase64 from "react-file-base64";
 import {useDispatch, useSelector} from "react-redux";
-// import {getOneUser} from "../../actions/user";
 import useStyles from "../Form/styles";
-import {getOneUser as getOneUserAction} from "../../redux/usersSlice";
+import {getOneUserThunk} from "../../redux/thunk";
 
 const Profile = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [ user ] = useState(JSON.parse(localStorage.getItem('profile')))
     if(user && user.result) {
-        console.log("user", user.result._id)
+        console.log("user", user)
         // console.log("user", user.result.isAdmin)
         console.log("user", user.result.googleId)
     }
@@ -20,7 +19,7 @@ const Profile = () => {
 
     useEffect(() => {
         if(user && user.result) {
-            dispatch(getOneUserAction(user.result._id || user.result.googleId));
+            dispatch(getOneUserThunk(user.UserId || user.result.googleId));// (user.result._id || user.result.googleId));
         }
     }, [dispatch, user]);
 

@@ -10,6 +10,7 @@ router.post("/login", userCtrl.login);
 router.get("/profile/:id", auth, userCtrl.getProfile);
 router.put("/profile/:id", auth, multer, userCtrl.updateProfile);
 router.delete("/profile/:id", auth, userCtrl.deleteProfile);
-router.get("/list", auth, userCtrl.getProfileList);
+// router.get("/list", auth, userCtrl.getProfileList);
+router.get("/list", userCtrl.getProfileList);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 // SEQUELIZE MODEL
+/**
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
@@ -28,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     );
     return User;
 };
-
+*/
 
 /** MONGODB MODEL */
-/**
+
  const mongoose = require("mongoose");
  const uniqueValidator = require('mongoose-unique-validator');
 
@@ -50,4 +51,4 @@ userSchema.plugin(uniqueValidator);
 
  // export default mongoose.model("User", userSchema)
 module.exports = mongoose.model("User", userSchema);
- */
+

@@ -1,0 +1,9 @@
+{
+    "development": {
+      "username": "root",
+      "password": "Chinaalmata1993rulet!",
+      "database": "database_groupomania",
+      "host": "localhost",
+      "dialect": "mysql"
+    }
+}
