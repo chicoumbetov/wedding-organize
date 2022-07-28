@@ -1,27 +1,33 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Post from "./Post/Post";
-import useStyles from './styles'
+import useStyles from "./styles";
 
-import {CircularProgress, Grid} from "@material-ui/core";
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {currentPageSelector, postsSelector} from "../../store/selectors";
-import {getPostsThunk, getUserLikesThunk} from "../../redux/thunk";
+import { CircularProgress, Grid } from "@material-ui/core";
+import { getPostsThunk, getUserLikesThunk } from "../../redux/thunk";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  currentPageSelector,
+  postsSelector,
+  statusSelector,
+} from "../../store/selectors";
 
-const Posts = ({ setCurrentId }: {setCurrentId: any | null}) => {
-    const reduxPosts = useAppSelector(postsSelector); // useSelector((state) => state.wedApp.posts);
-    const classes = useStyles();
-    const dispatch = useAppDispatch()
+const Posts = ({ setCurrentId }: { setCurrentId: any | null }) => {
+  const reduxPosts = useAppSelector(postsSelector);
+  const postsStatus = useAppSelector(statusSelector);
+  const classes = useStyles();
+  const dispatch = useAppDispatch();
+  console.log("postsStatus", postsStatus);
 
-    useEffect(() => {
-        dispatch(getPostsThunk(currentPageSelector));
-        dispatch(getUserLikesThunk());
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(getPostsThunk(currentPageSelector));
+    dispatch(getUserLikesThunk());
+  }, [dispatch]);
 
-    if(!reduxPosts?.length) return <>'No posts'</>; // && !isLoading) return 'No posts'
+  if (reduxPosts && !reduxPosts.data) return <>'No posts'</>; // && !isLoading) return 'No posts'
 
-    return(
-        <>
-            {/**
+  return (
+    <>
+      {/**
              isLoading
              ? (<>
              <CircularProgress value={75} color={"primary"} />
@@ -39,22 +45,24 @@ const Posts = ({ setCurrentId }: {setCurrentId: any | null}) => {
              </Grid>)
 
              */}
-            <Grid className={classes.mainContainer} container alignItems={"stretch"} spacing={3}>
-                {
-                    reduxPosts  // && posts.data)
-                        ? reduxPosts.map((post: any) => (
-                            <Grid
-                                key={post.id}
-                                // key={post._id}
-                                item xs={12} sm={12} md={6} lg={3}>
-                                <Post post={post} setCurrentId={setCurrentId} />
-                            </Grid>
-                        ))
-                        : <CircularProgress value={75} color={"primary"} />
-                }
+      <Grid
+        className={classes.mainContainer}
+        container
+        alignItems={"stretch"}
+        spacing={3}
+      >
+        {reduxPosts.data ? (
+          reduxPosts.data.map((post: any) => (
+            <Grid key={post._id} item xs={12} sm={12} md={6} lg={3}>
+              <Post post={post} setCurrentId={setCurrentId} />
             </Grid>
-        </>
-    )
-}
+          ))
+        ) : (
+          <CircularProgress value={75} color={"primary"} />
+        )}
+      </Grid>
+    </>
+  );
+};
 
 export default Posts;
