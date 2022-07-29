@@ -26,22 +26,23 @@ const Post = ({ post, setCurrentId }: any) => {
   const classes = useStyles();
   const history = useNavigate();
   // console.log("post :", post)
-  // const [likes, setLikes] = useState(post?.likes)
-  const [likes, setLikes] = useState(post?.Likes);
+  const [likes, setLikes] = useState(post?.likes); // server mongo
+  // const [likes, setLikes] = useState<string[]>(post?.Likes); // server sequelize
   const user = JSON.parse(localStorage.getItem("profile") || "{}");
 
   const userId =
     (user && user.result && user.result.googleId) ||
     (user && user.result && user.result._id);
-  // const hasLikePost = post.likes.find((like) => like === userId); // server mongo
-  const hasLikePost = post?.Likes?.find((like: any) => like?.UserId === userId);
+  const hasLikePost = post.likes.find((like: any) => like === userId); // server mongo
+  // const hasLikePost = post?.Likes?.find((like: any) => like?.UserId === userId); // server sequelize
 
   const handleLike = async () => {
-    dispatch(likePost(post.id));
+    // dispatch(likePost(post.id));
+    dispatch(likePost(post._id));
 
     if (hasLikePost) {
-      // setLikes(post.likes.filter((id) => id !== userId ))
-      setLikes(post?.Likes?.filter((id: any) => id.UserId !== userId));
+      setLikes(post.likes.filter((id: any) => id !== userId)); // server mongo
+      // setLikes(post?.Likes?.filter((id: any) => id.UserId !== userId));
     } else {
       // setLikes([ ...post.likes, userId ])
       setLikes([...post.Likes, userId]);
@@ -78,7 +79,7 @@ const Post = ({ post, setCurrentId }: any) => {
   // const openPost = () => history(`/posts/${post._id}`)
 
   return (
-    <Card className={classes.card} raised elevation={6}>
+    <Card className={classes.card} raised elevation={4}>
       {post ? (
         <ButtonBase className={classes.cardAction} onClick={() => openPost()}>
           <CardMedia
