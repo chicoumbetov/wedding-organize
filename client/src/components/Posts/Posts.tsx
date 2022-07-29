@@ -3,7 +3,7 @@ import Post from "./Post/Post";
 import useStyles from "./styles";
 
 import { CircularProgress, Grid } from "@material-ui/core";
-import { getPostsThunk, getUserLikesThunk } from "../../redux/thunk";
+import { getPostsThunk } from "../../redux/thunk";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   currentPageSelector,
@@ -19,16 +19,8 @@ const Posts = ({ setCurrentId }: { setCurrentId: any | null }) => {
 
   useEffect(() => {
     dispatch(getPostsThunk(currentPageSelector));
-    dispatch(getUserLikesThunk());
-  }, [dispatch]);
-
-  if (reduxPosts && !reduxPosts.data)
-    return (
-      <>
-        <CircularProgress value={75} color={"primary"} />
-        <div>No posts</div>
-      </>
-    );
+    // dispatch(getUserLikesThunk()); // server sequelize
+  }, [dispatch, postsStatus]);
 
   return (
     <>
@@ -38,14 +30,17 @@ const Posts = ({ setCurrentId }: { setCurrentId: any | null }) => {
         alignItems={"stretch"}
         spacing={3}
       >
-        {reduxPosts.data ? (
+        {reduxPosts && reduxPosts.data ? (
           reduxPosts.data.map((post: any) => (
             <Grid key={post._id} item xs={12} sm={12} md={6} lg={3}>
               <Post post={post} setCurrentId={setCurrentId} />
             </Grid>
           ))
         ) : (
-          <CircularProgress value={75} color={"primary"} />
+          <>
+            <CircularProgress value={75} color={"primary"} />
+            <div>No posts</div>
+          </>
         )}
       </Grid>
     </>
